@@ -35,7 +35,7 @@ export class CartManager {
         this.carts = await this.getCarts()
         this.carts.push(newCart)
         
-        await fs.writeFile(this.path,JSON.stringify(this.carts))
+        await fs.writeFile(this.path,JSON.stringify(this.carts,null,2))
         return newCart;
     }
 
@@ -55,7 +55,7 @@ export class CartManager {
 
             carts[index].product = cartProducts
 
-            await fs.writeFile(this.path, JSON.stringify(carts))
+            await fs.writeFile(this.path, JSON.stringify(this.carts,null,2))
             console.log("Producto agregado con exito") 
         }else{
             console.log("Carrito no encontrado")

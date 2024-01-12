@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class ProductManager {
     
     constructor() {
-        this.path = 'products.json';
+        this.path = './src/routes/products.json';
         this.products = [];
     }
 
@@ -18,7 +18,7 @@ export class ProductManager {
 
         this.products.push(newProduct);
 
-        await fs.writeFile(this.path, JSON.stringify(this.products));
+        await fs.writeFile(this.path, JSON.stringify(this.products,null,2));
 
         return newProduct;
     }
@@ -44,7 +44,7 @@ export class ProductManager {
         const index = products.findIndex(product => product.id === id);
         if (index !== -1) {
             products[index] = { id, ...data };
-            await fs.writeFile(this.path, JSON.stringify(products));
+            await fs.writeFile(this.path, JSON.stringify(this.products,null,2));
             return products[index];
         } else {
             console.log("Producto no encontrado");
@@ -56,7 +56,7 @@ export class ProductManager {
         const index = products.findIndex(product => product.id === id);
         if (index !== -1) {
             products.splice(index, 1);
-            await fs.writeFile(this.path, JSON.stringify(products));
+            await fs.writeFile(this.path, JSON.stringify(this.products,null,2));
             return;
         } else {
             console.log("Producto no encontrado");
